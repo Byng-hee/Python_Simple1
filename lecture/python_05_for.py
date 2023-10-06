@@ -18,6 +18,8 @@ for num in [1, 2, 3]:
     print(num)
 # for(int i=0; i<=9; i++) { printf(i); }
 
+
+
 # range() 함수
 # - range(시작 , 끝, 증감)  // 끝은 생략이 불가능하다.
 # - default 시작(0), 증감(+1)
