@@ -71,25 +71,35 @@ url = "https://v.daum.net/v/20231101163231654"
 # 1. URL 접속해서 전체 소스코드 가져오기
 result = requests.get(url)
 # status_code : 200(성공), 400번대 또는 500번대(오류)
-print(result)
-print(result.text)
+#print(result)
+#print(result.text)
 
 # 2. 전체코드(requests) -> BeautifulSoup4 전달
 doc = BeautifulSoup(result.text, "html.parser")
 
 # 3. 원하는 정보 수집
 #  - select() -> 결과(List Type)
+reg_date = doc.select("span.num_date")[0].get_text()
+print(f"날짜: {reg_date}")
+
 title = doc.select("h3.tit_view")[0].get_text() #""안에는 title이 들어감
 print(f"제목:{title}") # title[0].get_text() 도 가능
 
 # Tag이름으로만 SELECT 금지!!!
 #  1.선택자(id, class)
 #  2.상위 관계(자식, 자손)
-#  3.
 content_list = doc.select("div.article_view p")
+# content_list = ["<p>문단1</p>","<p>문단2</p>",.........]
 
 content = ""
+#  p = <p>문단1</p>
 for p in content_list:
+   # p.get_text() -> "문단1"
+   # 반복: content = content + p.get_text()
+   #     1: content = "" + "문단1"
+   #     2: content = "문단 1"+ "문단 2"
+   #     3: content = "문단 1 + 2" + "문단 3"
+   #     ...
    content += p.get_text()
 
 print(f"본문: {content}")
